@@ -1,0 +1,22 @@
+
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="{% static 'index/login_style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'index/login_style.js' %}" />
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<div class="login-page">
+    <div class="form">
+
+    <form class="login-form" role="form" action="{% url 'index:login_user'%}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <input type="text" placeholder="username" id="id_username" maxlength="30" name="username"/>
+      <input type="password" placeholder="password" id="id_password" maxlength="30" name="password"/>
+      <button type="submit">login</button>
+      <p class="message">Not registered? <a href="{% url 'index:register' %}">Create an account</a></p>
+    </form>
+  </div>
+</div>
