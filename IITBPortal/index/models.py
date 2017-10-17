@@ -16,7 +16,15 @@ class student(models.Model):
     graduation = models.CharField(max_length=250,default="")
     year = models.CharField(max_length=250,default="")
     city = models.CharField(max_length=250,default="")
-    courses = models.CharField(max_length=500,default="")
     
     def __str__(self):
         return self.login_id + " - " + self.university
+
+class courses(models.Model):
+    std = models.ForeignKey(student, on_delete=models.CASCADE)
+    course_code = models.CharField(max_length=20,default="")
+    course_name = models.CharField(max_length=250,default="")
+
+    def __str__(self):
+        return self.course_code
+

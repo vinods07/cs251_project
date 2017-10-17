@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}VINOD{% endblock %}</title>
+    <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/imagehover.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/style.css' %}">
+
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">IITB Portal</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li {% block home_active %}{% endblock %}><a href="{% url 'index:index' %}">Home</a></li>
+          <li {% block courses_active %}{% endblock %}><a href="{% url 'index:registered_courses' %}">Courses</a></li>
+          <li {% block events_active %}{% endblock %}><a href="#events">Events</a></li>
+          <li {% block profile_active %}{% endblock %}><a href="#profile">Profile</a></li>
+          <li><a href="{% url 'index:logout_user' %}" data-target="" data-toggle="modal">Logout</a></li>
+          <li class="btn-trial"><a href="#footer">IIT Bombay</a></li>
+        </ul>
+        </div>
+      </div>
+    </nav>
+    <br><br><br><br>
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>
+
+    <!--/ Navigation bar-->

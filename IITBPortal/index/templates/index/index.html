@@ -1,9 +1,18 @@
+{% extends 'index/base.html' %}
+{% block title %}Home{% endblock %}
+{% block home_active %}class= "active"{% endblock %}
+{% block body %}
 
-<h1>Welcome, you are home {{ students.username }}!</h1><br>
-<h2>Your courses are</h2><br>
-<ul>
-{% for number in student_course %}
-    <li>{{ number_list[ number ] }}
-        {{ course_lists[ number_list[ number ] ] }}</li><br>
-    {% endfor %}
-</ul>
+    <h1>Welcome {{ students.fname }}!</h1><br>
+    <h2>This is your Homepage</h2><br>
+    <ul>
+        {% for course in students.courses_set.all %}
+        <li><a href="{% url 'index:course' course.id %}">
+            {{ course.course_code }} - {{ course.course_name }}
+            </a>
+        </li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}

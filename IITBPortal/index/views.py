@@ -1,8 +1,8 @@
 from django.db.models import Q
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth import authenticate,login,logout,get_user_model
-from .models import student
+from .models import student, courses
 from .forms import UserForm,RegisterForm
 # Create your views here.
 User = get_user_model()
@@ -16,23 +16,28 @@ course_lists = {
     'cs251':'Software System Lab',
     'cs293':'Data Structures and Algorithms Lab',
 }
-number_list = {
-    'cs101':'1','1':'cs101',
-    'cs152':'2','2':'cs152',
-    'cs154':'3','3':'cs154',
-    'cs207':'4','4':'cs207',
-    'cs213':'5','5':'cs213',
-    'cs215':'6','6':'cs215',
-    'cs251':'7','7':'cs251',
-    'cs293':'8','8':'cs293',
-}
+
+def course(request,course_id):
+    if not request.user.is_authenticated():
+        return render(request, 'index/login.html')
+    else:
+        students = get_object_or_404(student, login_id=request.user.username)
+        course = get_object_or_404(courses, pk=course_id)
+        return render(request,'index/detail.html',{'students':students,'course':course})
+
+def registered_courses(request):
+    if not request.user.is_authenticated():
+        return render(request, 'index/login.html')
+    else:
+        students = get_object_or_404(student, login_id=request.user.username)
+        return render(request, 'index/courses.html', {'students': students})
 
 def first_login(request):
     if not request.user.is_authenticated():
         return render(request, 'index/login.html')
 
     else:
-        students = student.objects.get(login_id=request.user.username)
+        students = get_object_or_404(student,login_id=request.user.username)
 
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -44,19 +49,18 @@ def first_login(request):
         course_list = request.POST.getlist('course_list')
 
         for code in course_list:
-            students.courses += number_list[code]
-        student_course = students.courses
+            students.courses_set.create(course_code = code,course_name = course_lists[code])
+
         students.first_name= first_name
         students.last_name= last_name
         students.phone= phone
-        students.institute= institute
+        students.university= institute
         students.graduation= graduation
         students.year = year
         students.city= city
         students.save()
         return render(request,'index/index.html', {'course_lists':course_lists,'students':students,
-                                                   'course_list':course_list,'number_list':number_list,
-                                                   'student_course':student_course})
+                                                   'course_list':course_list})
 
     return render(request, 'index/login.html')
 
@@ -74,10 +78,8 @@ def index(request):
     #         ).distinct()
     #         return render(request, 'index/index.html', {'students': students,'course_lists':course_lists})
     else:
-        students = student.objects.get(login_id=request.user.username)
-        student_course = students.courses
-        return render(request, 'index/index.html', {'course_lists':course_lists,'students':students,
-                                                    'number_list': number_list,'student_course':student_course})
+        students = get_object_or_404(student, login_id=request.user.username)
+        return render(request, 'index/index.html', {'course_lists':course_lists,'students':students})
 
 def logout_user(request):
     logout(request)
@@ -96,10 +98,8 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                students = student.objects.get(login_id=request.user.username)
-                student_course = students.courses
-                return render(request, 'index/index.html', {'students': students,'course_lists':course_lists,
-                                                            'number_list': number_list,'student_course':student_course})
+                students = get_object_or_404(student, login_id=request.user.username)
+                return render(request, 'index/index.html', {'students': students,'course_lists':course_lists,})
             else:
                 return render(request, 'index/login.html', {'error_message': 'Your account has been disabled'})
         else:
@@ -126,7 +126,7 @@ def register(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                students = student.objects.filter(user=request.user)
+                students = get_object_or_404(student, login_id=request.user.username)
                 return render(request, 'index/first_login.html', {'students': students,'course_lists':course_lists})
     context = {
         "form": form,

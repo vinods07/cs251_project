@@ -1,0 +1,26 @@
+{% extends 'index/base.html' %}
+{% block title %}courses{% endblock %}
+{% block courses_active %}class= "active"{% endblock %}
+{% block body %}
+
+    <h1>Welcome {{ students.fname }}, to your courses page!</h1><br>
+    <h2>Your courses are</h2><br>
+    <!--<ul>
+        {% for course in students.courses_set.all %}
+        <li><a href="{% url 'index:course' course.id %}">
+            {{ course.course_code }} - {{ course.course_name }}
+            </a>
+        </li>
+
+        {% endfor %}
+    </ul>-->
+
+    {% for course in students.courses_set.all %}
+    <div style="background-color:#3AF378;color:white;padding:20px;">
+      <a href="{% url 'index:course' course.id %}">
+            {{ course.course_code }} - {{ course.course_name }}
+            </a>
+    </div><br><br>
+    {% endfor %}
+
+{% endblock %}

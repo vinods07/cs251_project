@@ -1,11 +1,7 @@
-<h1>Welcome to your homepage</h1>
-<br><br>
+{% extends 'index/base.html' %}
+{% block title %}Home{% endblock %}
 
-<!--
-{% if info %}
-    <ul>
-        <li>Name is: {{ info.name }}</li>
-        <li>Email id is: {{ info.email_id }}</li>
-        <li>Login id is: {{ info.login_id }}</li>
-    </ul>
-{% endif %}-->
+{% block body %}
+    <h2 margin_left="20px">Welcome to course page</h2>
+    {{ course.course_code }} - {{ course.course_name }}
+{% endblock %}
