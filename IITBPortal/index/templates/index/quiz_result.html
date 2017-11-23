@@ -1,0 +1,55 @@
+{% extends 'index/base.html' %}
+
+{% block title %}Quiz Result{% endblock %}
+
+{% block body %}
+<h2>Here is the question wise evaluation of {{ quiz.quiz_name }}</h2>
+<!--check_and_show_marks view to be implemented-->
+{% if grade %}
+{% for question in questions %}
+<div class="container">
+    <div class = "panel panel-warning">
+       <div class = "panel-heading">
+          <h3 class = "panel-title"><b>{{ question.question_text }}</b></h3>
+       </div>
+       <div class = "panel-body">
+           1) {{ question.option1 }}<br>
+           2) {{ question.option2 }}<br>
+           3) {{ question.option3 }}<br>
+           4) {{ question.option4 }}<br>
+    <br>
+    {% if grade.quiz_attempted %}
+    {% for rec in question.answer_record_set.all %}
+    {% if rec.parent_student == student %}
+    <h4 style="color: blue">Correct Answer is:- {{ question.correct_answer }}</h4>
+    <h4 style="color: blue"> Your Answer is:-
+    {% if rec.ans_given %}
+        {{ rec.ans_given }}<br>
+        {% if rec.ans_given == question.correct_answer %}
+    <h4 style="color: blue">Result:- <font color="green">Correct Answer! , +4 </font></h4>
+        {% else %}
+        <h4 style="color: blue">Result:- <font color="red">Wrong Answer! , -1 </font></h4>
+        {% endif %}
+    {% else %}
+        No answer given by you! , +0
+    {% endif %}
+    </h4>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+       </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="container" style="background-color: #fcfc1e">
+    <h3>Here are final marks</h3>
+    <h4>Marks obtained:- <font color="blue">{{ grade.marks_obtained }}</font> out of <font color="blue">{{ grade.total_marks }} </font></h4>
+</div>
+{% else %}
+<div class="container" style="background-color: #fcfc1e">
+    <h4 style="color: red">You haven't attempted the quiz</h4>
+</div>
+{% endif %}
+<br><br><br><br><br><br><br><br>
+{% endblock %}

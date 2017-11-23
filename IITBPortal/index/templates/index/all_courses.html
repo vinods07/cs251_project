@@ -1,0 +1,53 @@
+{% extends 'index/base.html' %}
+{% block title %}courses{% endblock %}
+{% block all_active %}class="active"{% endblock %}
+{% block body %}
+
+<html>
+    <style>
+      .info {
+  background-color: #fff;
+  padding: 10px;
+
+  border: 1px solid #000000;
+  border-radius: 20px;
+  width: 80%;
+}
+
+.info:hover {
+	background-color: #ccc;
+	border-color: green;
+
+}
+
+.info:active {
+
+  top: +12px;
+}
+    </style>
+
+ </html>
+
+
+    <h1>List of all courses</h1><br>
+    <!--<ul>
+        {% for course in students.courses_set.all %}
+        <li><a href="{% url 'index:course' course.id %}">
+            {{ course.course_code }} - {{ course.course_name }}
+            </a>
+        </li>
+
+        {% endfor %}
+    </ul>-->
+    <ul>
+    {% if courses %}
+    {% for course in courses %}
+        <div class="info">
+            <a href="{% url 'index:course_info' course.id %}"><h1>{{ course.course_code }} - {{ course.course_name }}</h1></a>
+            {{ course.course_info }}
+        </div>
+        <br><br>
+    {% endfor %}
+    {% endif %}
+    </ul>
+{% endblock %}

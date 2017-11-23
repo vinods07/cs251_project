@@ -1,7 +1,166 @@
 {% extends 'index/base.html' %}
-{% block title %}Home{% endblock %}
+{% load app_filter %}
+{% block title %}Course Details{% endblock %}
 
 {% block body %}
-    <h2 margin_left="20px">Welcome to course page</h2>
-    {{ course.course_code }} - {{ course.course_name }}
+
+    <h2 style="margin-left: 20px">Welcome to course page</h2>
+<h1 style="margin-left: 30px">{{ course.course_code }} - {{ course.course_name }}</h1> <br>
+<h3 id="k" class="myclass">{{ course.course_info }}</h3>
+<br>
+{% if topics %}
+{% for topic in topics %}
+<br><br>
+
+<ul>
+
+    <div class="row ">
+      <div class="span4 collapse-group">
+        <div id="p" class="container">
+            <h3><font color="red">Topic {{ topic.id }}:-</font><font color="blue"> {{ topic.topic_name }}</font></h3>
+            <h4 style="background-color: #f7e1f6">Topic info:- {{ topic.topic_info }}</h4><br>
+            <div class="collapse" id="viewdetails{{ topic.id }}">
+                <h4 style="color: green">Course material</h4>
+                {% if 'material'|material_in_topic:topic %}
+                {% for material in 'material'|material_in_topic:topic %}
+               <div class = "panel panel-success">
+                   <div class = "panel-heading">
+                       <h3 class = "panel-title"><b><strong>Name:-</strong> {{ material.course_material_name }}</b></h3>
+                       <br>
+                       <h4 class = "panel-title"><strong>Detail:-</strong> {{ material.course_material_info }}</h4>
+                   </div>
+                   <div class = "panel-body">
+                      <a href="{{ material.course_content_file.url }}" >{{ material.course_content_file }}</a>
+                       {% if student.is_professor %}
+
+                       {% endif%}
+                   </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h4 style="color: red">No course materials added yet</h4>
+               {% endif %}
+                {% if student.is_professor %}
+                <form class="form-horizontal" role="form" action="{% url 'index:add_resourse' topic.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                            <div style="text-align: left; margin-left: 20px;">
+                            <button type="submit" class="btn btn-success">Add Course Resourses</button>
+                            </div>
+                    </div>
+                </form>
+                <br><br>
+                {% endif%}
+                <hr>
+                <h4 style="color: #f74cf7">Assignments</h4>
+               {% if all_assignments|assignments_in_topic:topic %}
+                {% for assignment in all_assignments|assignments_in_topic:topic %}
+               <div class = "panel panel-warning">
+                   <div class = "panel-heading">
+                      <h3 class = "panel-title"><b style="color: green">{{ assignment.assignment_name }}</b></h3>
+                       <h3 class = "panel-title"><b>Added on:-</b> <font color="blue">{{ assignment.date_added }}</font></h3>
+                       <h3 class = "panel-title"><b>Deadline:-</b> <font color="red">{{ assignment.deadline }}</font></h3>
+                   </div>
+                   <div class = "panel-body">
+                      <a href="{{ assignment.assignment_content_file.url }}"> {{ assignment.assignment_content_file }} </a>
+                   </div>
+                </div>
+
+                {% endfor %}
+                {% else %}
+                <h4 style="color: red">No asignments added yet</h4>
+               {% endif %}
+                {% if student.is_professor %}
+                <form class="form-horizontal" role="form" action="{% url 'index:add_assignment' topic.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                            <div style="text-align: left; margin-left: 20px;">
+                            <button type="submit" class="btn btn-success">Add assignment</button>
+                            </div>
+                    </div>
+                </form>
+                <br><br>
+                {% endif%}
+                <hr>
+                <h4 style="color: #4790f7">Quizzes</h4>
+                {% if topic.quiz_set.all %}
+                {% for quiz in topic.quiz_set.all %}
+               <div class = "panel panel-info">
+                   <div class = "panel-heading">
+                      <h4 class = "panel-title"><b>{{ quiz.quiz_name }}</b></h4><br>
+                       <h3 class = "panel-title"><b>{{ quiz.quiz_info }}</b></h3>
+                   </div>
+                   {% if student.grade_set.all %}
+                   {% for grade in student.grade_set.all %}
+                   {% if grade.parent_quiz == quiz %}
+
+                   {% if grade.quiz_attempted %}
+                   <form class="form-horizontal" role="form" action="{% url 'index:result' quiz.id %}" method="post" enctype="multipart/form-data">
+                   {% else %}
+                   <form class="form-horizontal" role="form" action="{% url 'index:take_quiz' quiz.id %}" method="post" enctype="multipart/form-data">
+                   {% endif %}
+
+                   {% else %}
+                   <form class="form-horizontal" role="form" action="{% url 'index:take_quiz' quiz.id %}" method="post" enctype="multipart/form-data">
+                   {% endif %}
+                   {% endfor %}
+                   {% else %}
+                       <form class="form-horizontal" role="form" action="{% url 'index:take_quiz' quiz.id %}" method="post" enctype="multipart/form-data">
+                   {% endif %}
+                       {% csrf_token %}
+                       <div class = "panel-body">
+                           <div class="form-group">
+                                <div style="text-align: left; margin-left: 20px;">
+                                {% if student.is_professor %}
+                                <button type="submit" class="btn btn-warning">
+                                    Edit Quiz
+                                {% else %}
+                                <button type="submit" class="btn btn-success">
+                                    Start the Quiz
+                                {% endif %}
+                                </button>
+                                </div>
+                           </div>
+                       </div>
+                   </form>
+                </div>
+
+                {% endfor %}
+                {% else %}
+                <h4 style="color: red"> No Quizzes added yet</h4>
+               {% endif %}
+                {% if student.is_professor %}
+                <form class="form-horizontal" role="form" action="{% url 'index:add_quiz' topic.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                            <div style="text-align: left; margin-left: 20px;">
+                            <button type="submit" class="btn btn-success">Add Quiz</button>
+                            </div>
+                    </div>
+                </form>
+                <br><br>
+                {% endif%}
+
+            </div>
+            <p><a class="btn btn-info" data-toggle="collapse" data-target="#viewdetails{{ topic.id }}"><font color="white">View details &raquo;</font></a></p>
+        </div>
+      </div>
+    </div>
+</ul>
+
+{% endfor %}
+
+{% endif %}
+<br>
+{% if student.is_professor %}
+<form class="form-horizontal" role="form" action="{% url 'index:add_topic' course.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+            <div style="text-align: left; margin-left: 70px;">
+            <button type="submit" class="btn btn-success">Add New Topic</button>
+            </div>
+    </div>
+</form>
+{% endif %}
+<br><br><br><br><br><br>
 {% endblock %}

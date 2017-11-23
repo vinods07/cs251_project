@@ -1,0 +1,73 @@
+{% extends 'index/base.html' %}
+
+{% block title %}Add Question{% endblock %}
+
+{% block body %}
+<div class="container">
+<form class="form-horizontal" action="{% url 'index:add_question' topic_id=topic.id quiz_id=quiz.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="question_text" class="control-label col-sm-2">Question</label>
+      <div class="col-sm-10" >
+        <input type="text" class="form-control" name="question_text" id="question_text">
+      </div>
+    </div>
+    <br><br>
+    <h5 style="margin-left: 115px;font-weight:bold"><strong>Type</strong></h5>
+    <div class="col-sm-10" style="margin-left: 178px">
+    <div class="radio">
+        <label><input type="radio" name="is_subjective" value="objective">Objective</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" name="is_subjective" value="subjective">Subjective</label>
+    </div>
+    </div>
+    <br><br<br><br>
+    <br><br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">option1</label>
+      <div class="col-sm-10" >
+        <input type="text" class="form-control" name="option1">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2">option2</label>
+        <div class="col-sm-10" >
+            <input type="text" class="form-control" name="option2" >
+        </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2">option3</label>
+      <div class="col-sm-10" >
+        <input type="text" class="form-control" name="option3">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2">option4</label>
+        <div class="col-sm-10" >
+        <input type="text" class="form-control" name="option4">
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2">Correct Answer </label>
+        <div class="col-md-4 selectContainer">
+        <div class="input-group">
+        <select name="correct_answer" class="form-control selectpicker" >
+            <option>option1</option>
+            <option>option2</option>
+            <option>option3</option>
+            <option>option4</option>
+        </select>
+      </div>
+    </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">Add Question</button>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'index/base.html' %}
+{% block title %}Update Interest{% endblock %}
+
+{% block body %}
+<form class="form-horizontal" action="{% url 'index:update_interests'%}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+<div class="form-group">
+                    <label class="col-md-4 control-label">Select your interests*</label>
+                    <div class="col-md-4">
+                        {% for interest in INTERESTS %}
+                        <div class="check">
+                            <label>
+                                <input type="checkbox" value="{{ interest }}" name="interest_list"/>{{ interest }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">Update Interests</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

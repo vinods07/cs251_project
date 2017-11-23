@@ -1,6 +1,123 @@
 {% extends 'index/base.html' %}
-{% block profile_active %}Courses{% endblock %}
+{% block title %}Profile{% endblock %}
+{% block profile_active %}class= "active"{% endblock %}
 
 {% block body %}
+
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+
+    <!-- Left Column -->
+    <div class="w3-third">
+
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="{{ student.profile_pic.url }}" align="middle" style="width:50%" alt="http://www.stallerdental.com/wp-content/uploads/2016/12/user-icon.png">
+          <br><br>
+          <form class="form-horizontal" role="form" action="{% url 'index:update_profile_pic' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-success">Update Profile pic</button>
+                            </div>
+                        </div>
+                    </form>
+          <br>
+        </div>
+
+        <div class="w3-container">
+
+          <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ student.first_name }} {{ student.last_name }}</p>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>
+          {% if student.is_professor %}
+              Professor
+          {% else %}
+              Student
+          {% endif %}
+          </p>
+          <p><i class="fa fa-university fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ student.university }}</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ student.city }}</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ student.email_id }}</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ student.phone }}</p>
+          <hr>
+          <form class="form-horizontal" role="form" action="{% url 'index:update_profile' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-success">Update Profile</button>
+                            </div>
+                        </div>
+                    </form>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Interests</b></p>
+          {% for interest in student.interest_set.all %}
+            <p>{{ interest.interest_name }}</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:100%">100%</div>
+          </div>
+            {% endfor %}<br>
+          <form class="form-horizontal" role="form" action="{% url 'index:add_interests' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div style="text-align: center;">
+                                <button type="submit" class="btn btn-success">Update Interests</button>
+                            </div>
+                        </div>
+                    </form>
+          <br>
+          <!--<p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>-->
+          <!--<p>English</p>-->
+          <!--<div class="w3-light-grey w3-round-xlarge">-->
+            <!--<div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>-->
+          <!--</div>-->
+          <!--<p>Spanish</p>-->
+          <!--<div class="w3-light-grey w3-round-xlarge">-->
+            <!--<div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>-->
+          <!--</div>-->
+          <!--<p>German</p>-->
+          <!--<div class="w3-light-grey w3-round-xlarge">-->
+            <!--<div class="w3-round-xlarge w3-teal" style="height:24px;width:25%"></div>-->
+          <!--</div>-->
+          <br>
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+
+
+      <div class="w3-container w3-card-2 w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Progress Report</h2>
+
+        {% for course in student.course_set.all %}
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>{{ course.course_code }} - {{ course.course_name }}</b></h5>
+            {% for topic in course.topic_set.all %}
+            {% for quiz in topic.quiz_set.all %}
+
+            <h6 class="w3-text-teal"><i class="fa fa-paper-plane-o fa-fw w3-margin-right"></i><a href="{% url 'index:evaluate_quiz' quiz.id %}">{{ quiz.quiz_name }}</a></h6>
+            {% endfor %}
+            {% endfor %}
+            <hr>
+        </div>
+        {% endfor %}
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+
+  <!-- End Grid -->
+  </div>
+
+  <!-- End Page Container -->
+</div>
+
 
 {% endblock %}

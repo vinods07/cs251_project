@@ -3,7 +3,33 @@
 {% block courses_active %}class= "active"{% endblock %}
 {% block body %}
 
-    <h1>Welcome {{ students.fname }}, to your courses page!</h1><br>
+<html>
+    <style>
+      .info {
+  background-color: #fff;
+  padding: 10px;
+
+  border: 1px solid #000000;
+  border-radius: 20px;
+  width: 80%;
+}
+
+.info:hover {
+	background-color: #ccc;
+	border-color: green;
+
+}
+
+.info:active {
+
+  top: +12px;
+}
+    </style>
+
+ </html>
+
+
+    <h1>Welcome {{ student.first_name }}, to your courses page!</h1><br>
     <h2>Your courses are</h2><br>
     <!--<ul>
         {% for course in students.courses_set.all %}
@@ -14,13 +40,19 @@
 
         {% endfor %}
     </ul>-->
-
-    {% for course in students.courses_set.all %}
-    <div style="background-color:#3AF378;color:white;padding:20px;">
-      <a href="{% url 'index:course' course.id %}">
-            {{ course.course_code }} - {{ course.course_name }}
-            </a>
-    </div><br><br>
+    <ul>
+    {% if courses %}
+    {% for course in courses %}
+        <div class="info">
+            <a href="{% url 'index:course' course.id %}"><h1>{{ course.course_code }} - {{ course.course_name }}</h1></a>
+            {{ course.course_info }}
+        </div>
+        <br><br>
     {% endfor %}
 
+    {% else %}
+        <h3 style="color: blue">You haven't registered for any courses. Register it from courses listed in <font style="color: green">All Courses tab</font> </h3>
+    {% endif %}
+
+    </ul>
 {% endblock %}

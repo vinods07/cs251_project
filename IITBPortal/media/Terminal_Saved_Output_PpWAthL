@@ -1,0 +1,131 @@
+Last login: Sun Oct 22 11:34:24 on console
+________________________________________________________________________________
+| ~ @ ameys-MacBook-Pro (ameypatil) 
+| => cd Documents/
+total 16
+-rw-r--r--@  1 ameypatil  staff    10K Oct 19 12:11 .DS_Store
+-rw-r--r--   1 ameypatil  staff     0B Sep 30 11:38 .localized
+drwxr-xr-x   4 ameypatil  staff   136B Sep 30 12:53 CS-213-Codes/
+drwxr-xr-x   5 ameypatil  staff   170B Sep 30 12:53 CS-251-Codes/
+drwxr-xr-x   8 ameypatil  staff   272B Oct 20 14:11 CS251_Project-IITB_Portal/
+drwxr-xr-x  10 ameypatil  staff   340B Oct  9 20:42 Competitive-Coding/
+drwxr-xr-x   4 ameypatil  staff   136B Sep 30 11:45 Doxygen/
+drwxr-xr-x   4 ameypatil  staff   136B Sep 30 11:45 Extra_Projects_and_Hobby_Work/
+drwxr-xr-x  22 ameypatil  staff   748B Sep 30 11:58 HTML templates/
+drwxr-xr-x   4 ameypatil  staff   136B Sep 30 12:53 MATLAB/
+drwxr-xr-x   5 ameypatil  staff   170B Sep 30 12:49 Outlab4-task1/
+drwxr-xr-x   7 ameypatil  staff   238B Sep 30 11:45 Processing/
+drwxr-xr-x  13 ameypatil  staff   442B Sep 30 11:56 SLAM/
+drwxr-xr-x   3 ameypatil  staff   102B Sep 30 11:45 SSL/
+drwxr-xr-x  10 ameypatil  staff   340B Oct 19 11:59 SSL-Submissions/
+drwxr-xr-x   6 ameypatil  staff   204B Oct 19 11:57 SSL_Project/
+drwxr-xr-x@ 12 ameypatil  staff   408B Oct 11 16:59 Viberr-master/
+-rw-------   1 ameypatil  staff    88B Sep 30 09:40 cppTemplate.cpp
+drwxr-xr-x  12 ameypatil  staff   408B Sep 30 14:26 java/
+drwxr-xr-x   7 ameypatil  staff   238B Oct 19 11:59 mysite/
+________________________________________________________________________________
+| ~/Documents @ ameys-MacBook-Pro (ameypatil) 
+| => cd Competitive-Coding/
+total 16
+-rw-r--r--@  1 ameypatil  staff   6.0K Oct  9 20:42 .DS_Store
+drwxr-xr-x  15 ameypatil  staff   510B Sep 30 12:53 .git/
+drwxr-xr-x   7 ameypatil  staff   238B Oct  9 20:37 Codechef/
+drwxr-xr-x   6 ameypatil  staff   204B Sep 30 11:46 Codeforces/
+drwxr-xr-x   2 ameypatil  staff    68B Sep 30 11:45 Hackerearth/
+drwxr-xr-x   5 ameypatil  staff   170B Sep 30 11:46 Practise/
+-rw-------   1 ameypatil  staff    53B Aug 11 16:39 README.md
+-rw-------   1 ameypatil  staff   3.1K Aug  8 16:34 complex-hull.cpp
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding @ ameys-MacBook-Pro (ameypatil) 
+| => cd Codechef/
+total 8
+-rw-r--r--@  1 ameypatil  staff   6.0K Oct  9 20:42 .DS_Store
+drwxr-xr-x   5 ameypatil  staff   170B Sep 30 12:55 Codechef AUG Long/
+drwxr-xr-x  14 ameypatil  staff   476B Oct 13 20:13 Codechef_Oct_Long/
+drwxr-xr-x   8 ameypatil  staff   272B Sep 30 12:37 Codechef_PICT/
+drwxr-xr-x   9 ameypatil  staff   306B Sep 30 12:37 Codechef_Sept_Long/
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef @ ameys-MacBook-Pro (ameypatil) 
+| => mkdir Codechef_Oct_CookOff
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef @ ameys-MacBook-Pro (ameypatil) 
+| => cd Codechef_Oct_CookOff/
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => ls
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => touch A.cpp
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => touch B.cpp
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => touch C.cpp
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => touch D.cpp
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => touch E.cpp
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => edit *
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => g++ A.cpp 
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => ./a.out 
+3
+2 1
+4 7
+4 3
+9 2 8 6
+5 2
+6 1 1 1 11
+0
+
+-1
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => g++ A.cpp 
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => ./a.out 
+3
+2 1
+4 7
+4 3
+9 2 8 6
+5 2
+6 1 1 1 17
+9
+
+1
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => ./a.out 
+^C
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => touch in
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => f
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => ./a.out < in
+7
+9
+1
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => ./a.out 
+1
+5 2
+100 2 3 4 200
+200
+________________________________________________________________________________
+| ~/Documents/Competitive-Coding/Codechef/Codechef_Oct_CookOff @ ameys-MacBook-Pro (ameypatil) 
+| => 

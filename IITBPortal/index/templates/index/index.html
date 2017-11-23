@@ -1,18 +1,42 @@
 {% extends 'index/base.html' %}
-{% block title %}Home{% endblock %}
+{% load app_filter %}
+{% block title %}News Feed{% endblock %}
 {% block home_active %}class= "active"{% endblock %}
 {% block body %}
+<style>
+    .content {
+        width: 80%;
+        border: 1px solid;
+        padding: 20px;
+        overflow: hidden;
+    }
 
-    <h1>Welcome {{ students.fname }}!</h1><br>
-    <h2>This is your Homepage</h2><br>
+    .content img {
+        margin-right: 15px;
+        float: left;
+    }
+</style>
+
+    <h2>Welcome to IITB-Portal</h2><br>
     <ul>
-        {% for course in students.courses_set.all %}
-        <li><a href="{% url 'index:course' course.id %}">
-            {{ course.course_code }} - {{ course.course_name }}
-            </a>
-        </li>
+        {% if news_feed %}
+        {% for feed in news_feed %}
+        {% if feed.my_tag in interests|interest_name %}
+        <div class="content">
+            <a href={{ feed.href_url }} target="_blank">{% autoescape off %} {{ feed.image_url }}
+                {% endautoescape %} </a>
+            <div>
+                <h3><a href={{ feed.href_url }} target="_blank">{{ feed.topic }}</a></h3>
+                <p>{{ feed.desc }}</p>
+                <em style="float:right;"> {{ feed.date }} <br> {{ feed.my_tag }} </em>
 
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
+        {% else %}
+        <h3 style="color: green">Update Interests in Profile section to see the news feed :) </h3>
+        {% endif %}
     </ul>
 
 {% endblock %}

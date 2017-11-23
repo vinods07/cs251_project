@@ -4,15 +4,28 @@
     {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}VINOD{% endblock %}</title>
+    <title>{% block title %}Title Block{% endblock %}</title>
     <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
     <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/imagehover.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'index/css/style.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js">        </script>
+    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.min.js"></script>
+    <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
 
 </head>
 <body>
@@ -24,16 +37,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">IITB<span>Portal</span></a>
+        <a class="navbar-brand" href="{% url 'index:index' %}">IITB<span>Portal</span></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li {% block home_active %}{% endblock %}><a href="{% url 'index:index' %}">Home</a></li>
-          <li {% block courses_active %}{% endblock %}><a href="{% url 'index:registered_courses' %}">Courses</a></li>
-          <li {% block events_active %}{% endblock %}><a href="#events">Events</a></li>
-          <li {% block profile_active %}{% endblock %}><a href="#profile">Profile</a></li>
+          <li {% block courses_active %}{% endblock %}><a href="{% url 'index:registered_courses' %}">My Courses</a></li>
+          <li {% block all_active %}{% endblock %}><a href="{% url 'index:all_courses' %}">All Courses</a></li>
+          <!--<li {% block profile_active %}{% endblock %}><a href="{% url 'index:profile' %}">My Profile</a></li>-->
           <li><a href="{% url 'index:logout_user' %}" data-target="" data-toggle="modal">Logout</a></li>
-          <li class="btn-trial"><a href="#footer">IIT Bombay</a></li>
+          <li class="btn-trial"><a href="{% url 'index:profile' %}">{{ student.first_name }} {{ student.last_name }}</a></li>
         </ul>
         </div>
       </div>

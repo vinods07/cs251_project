@@ -1,0 +1,70 @@
+{% extends 'index/base.html' %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block body %}
+<h2>Here is the quiz</h2>
+<h3 style="color: #f97127"><font color="red">P.S:-</font>This quiz is one time proccess. Don't attempt to go back! </h3>
+<form class="form-horizontal" action="{% url 'index:evaluate_quiz' quiz_id=quiz.id %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<!--check_and_show_marks view to be implemented-->
+{% for question in questions %}
+<div class="container">
+    <div class = "panel panel-warning">
+       <div class = "panel-heading">
+          <h3 class = "panel-title"><b>{{ question.question_text }}</b></h3>
+       </div>
+       <div class = "panel-body">
+          <div class="radio">
+            <label><input type="radio" name="question{{ question.id }}" value="option1">1) {{ question.option1 }}</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="question{{ question.id }}" value="option2">2) {{ question.option2 }}</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="question{{ question.id }}" value="option3">3) {{ question.option3 }}</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="question{{ question.id }}" value="option4">4) {{ question.option4 }}</label>
+          </div>
+       </div>
+    </div>
+</div>
+{% endfor %}
+
+
+{% if not student.is_professor %}
+<div class="form-group">
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-success">Evaluate and submit</button>
+    </div>
+</div>
+{% endif %}
+</form>
+
+
+
+{% if student.is_professor %}
+<form class="form-horizontal" action="{% url 'index:add_another_question' quiz_id=quiz.id %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success">Add another question</button>
+        </div>
+    </div>
+</form>
+
+
+<form class="form-horizontal" action="{% url 'index:course' course_id=topic.course.id %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success">Add quiz</button>
+        </div>
+    </div>
+</form>
+
+{% endif %}
+
+<br><br><br><br><br><br><br><br>
+{% endblock %}

@@ -11,13 +11,16 @@
   <div class="form">
     <form class="login-form" role="form" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+      <h4>First Name</h4>
       <input type="text" placeholder="first name" name="first_name"/>
+      <h4>Last Name</h4>
       <input type="text" placeholder="last name" name="last_name"/>
+      <h4>Username</h4>
       <input type="text" placeholder="create a username" id="id_username" maxlength="30" name="username"/>
-      <input type="text" placeholder="email address" name="email"/>
+      <h4>Password</h4>
       <input type="password" placeholder="password" name="password"/>
-      <button type="submit">login</button>
-      <p class="message">Already registered? <a href="{% url 'index:login_user' %}">Sign In</a></p>
+      <button type="submit">Sign Up</button>
+      <p class="message"><h4  >Already registered? <a href="{% url 'index:login_user' %}"><br>Sign In</h4></a></p>
     </form>
   </div>
 </div>
